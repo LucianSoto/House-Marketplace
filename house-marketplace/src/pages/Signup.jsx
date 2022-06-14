@@ -1,8 +1,11 @@
-
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
+import { db } from '../firebase.config'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { ReactComponent as ArrowRightIcon } from '../assets/svg/keyboardArrowRightIcon.svg'
 import visibilityIcon from '../assets/svg/visibilityIcon.svg'
+import { setDoc, doc, serverTimestamp } from 'firebase/firestore'
+import { toast } from 'react-toastify'
 
 function SignUp() {
   const [showPassword, setShowPassword] = useState(false)
@@ -14,24 +17,50 @@ function SignUp() {
 
   const {email, password, name} = formData
   
-  const navigate = useNavigate
+  const navigate = useNavigate()
 
   const onChange = (e) => {
+    
     setFormData((prevState) => ({
       ...prevState, 
       [e.target.id]: e.target.value,
+      
     }))
+  }
+
+  const onSubmit = async (e) => {
+    e.preventDefault()
+    
+    try{
+      const auth = getAuth()
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password)
+      const user = userCredential.user
+
+      updateProfile(auth.currentUser, {
+        displayName: name,
+      })
+
+      const formDataCopy = {...formData}
+      delete formDataCopy.password
+      formDataCopy.timestamp = serverTimestamp()
+
+      await setDoc(doc(db, 'users', user.uid), formDataCopy)
+      
+      navigate('/')
+    } catch (error) {
+      toast.error('Check all fields')
+    }
   }
 
   return (
     <>
       <div className="pageContainer">
         <header>
-          <p className="pageHeader">Welcome Back!</p>
+          <p className="pageHeader">Create Account</p>
         </header>
 
         <main>
-          <form >
+          <form onSubmit={onSubmit}>
             <input 
               type="text"
               className='nameInput' 
@@ -54,7 +83,9 @@ function SignUp() {
                 type={showPassword ? 'text' : 'password'} 
                 className='passwordInput' 
                 placeholder='Password' 
-                id='password' 
+                id='password'
+                value={password}
+                onChange={onChange}
               />
 
               <img 
