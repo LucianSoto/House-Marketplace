@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { useNavigate } from 'react-router-dom'
 import Spinner from '../components/Spinner'
+import { toast } from 'react-toastify'
 
 const CreateListing = () => {
   const [loading, setLoading] = useState(false)
@@ -22,7 +23,21 @@ const CreateListing = () => {
     longitude: 0,
   })
 
-  const {type,name,bedrooms,bathrooms,parking,furnished,address,offer,regularPrice,discountedPrice,images,latitude,longitude} = formData
+  const {
+    type,
+    name,
+    bedrooms,
+    bathrooms,
+    parking,
+    furnished,
+    address,
+    offer,
+    regularPrice,
+    discountedPrice,
+    images,
+    latitude,
+    longitude
+  } = formData
 
   const auth = getAuth()
   const navigate = useNavigate()
@@ -77,9 +92,50 @@ const CreateListing = () => {
     }
   }
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault()
-    console.log(formData)
+    setLoading(true)
+
+    if(discountedPrice >= regularPrice) {
+      setLoading(false)
+      toast.error('Discounted price needs to be less than regular price.')
+      return
+    }
+
+    if(images.length > 6 ) {
+      setLoading(false)
+      toast.errot('Max 6 images.')
+      return
+    }
+
+    let geolocation = {}
+    let location
+
+    if(geolocationEnabled) {
+      const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${process.env.REACT_APP_GEOCODE_API_KEY}`)
+      // RESTART SERVER WHENEVER YOU ADD A NEW ENVIRONMENT VARIABLE
+
+      const data = await response.json()
+
+      geolocation.lat = data.result[0].geometry.location.lat ??
+      0
+      geolocation.lng = data.result[0].geometry.location.lng ??
+      0
+
+      location = data.status === 'ZERO_RESULTS' ? undefined : data.results[0]?.formatted_address
+
+      if (location === undefined || location.includes('undefined')) {
+        setLoading(false)
+        toast.error('Please enter a correct address')
+        return
+      }
+    } else {
+      geolocation.lat = latitude
+      geolocation.lng = longitude
+      location = address
+    }
+
+    setLoading(false)
   }
 
   return (
