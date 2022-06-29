@@ -18,7 +18,7 @@ function App() {
     <>
       <Router>
         <Routes>  
-          <Route path='/' element={<Explore />} />
+          <Route path='/House-Marketplace' element={<Explore/>} />
           <Route path='/Offers' element={<Offers />} />
           <Route path='/category/:categoryName' element={<Category/>} />
           <Route path='profile' element={<PrivateRoute />}>
