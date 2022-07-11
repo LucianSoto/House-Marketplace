@@ -57,8 +57,6 @@ const Category = () => {
     fetchListings()
   }, [params.categoryName])
 
-  console.log(params)
-
   return (
     <div className='category'>
       <header>
