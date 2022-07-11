@@ -5,8 +5,6 @@ import bathtubIcon from '../assets/svg/bathtubIcon.svg';
 
 const ListingItem = ({ listing, id }) => {
 
-  console.log(id)
-
   return (
     <li className='categoryListing'>
       <Link to={`/category/${listing.type}/${id}`}

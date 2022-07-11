@@ -19,7 +19,6 @@ const Listing = () => {
     const fetchListing = async () => {
       const docRef = doc(db, 'listings', params.listingId)
       const docSnap = await getDoc(docRef)
-      console.log(params)
 
       if(docSnap.exists()) {
         console.log(docSnap.data())
@@ -31,10 +30,70 @@ const Listing = () => {
     fetchListing()
   }, [navigate, params.listingId])
 
+  if(loading) {
+    return <Spinner/>
+  }
+
   return (
-    <div>
-      LISTING
-    </div>
+    <main>
+      {/* slider */}
+      <div className="shareIconDiv" onClick={()=> {
+        navigator.clipboard.writeText(window.location.href)
+        setShareLinkCopied(true)
+        setTimeout(()=> {
+          setShareLinkCopied(false)
+        }, 2000)
+      }}>
+        <img src={ShareIcon} alt="" />
+      </div>
+      {shareLinkCopied && <p className='linkCopied'>Link Copied!</p>}
+
+      <div className="listingDetails">
+        <p className="listingName"> 
+          {listing.name} - $
+          { listing.offer 
+            ? listing.discountedPrice
+              .toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ',') 
+            : listing.regularPrice
+              .toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ',') 
+          }
+        </p>
+        <p className="listingLocation">{listing.location}</p>
+        <p className="listingType">
+          For {listing.type === 'rent' ? 'Rent' : 'Sale'}
+        </p>
+        {listing.offer && (
+         <p className="ciscountedPrice">
+          ${listing.regualrPrice - listing.discountedPrice}
+         </p>
+        )}
+        <ul className="listingDetaulsList">
+          <li>
+            {listing.bedrooms > 1 ? `${listing.bedrooms} Bedrooms`
+            : '1 Bedroom'}
+          </li>
+          <li>
+            {listing.bathrooms > 1 ? `${listing.bathrooms} Bathrooms` : '1 Bathroom'}
+          </li>
+          <li>{listing.parking === true ? 'Desicgnated Parking' : 'Street Parking'}</li>
+          <li>{listing.furnished === true ? 'Furnished' : 'Not Furnished'}</li>
+        </ul>
+
+        <p className="listingLocaitonTitle">Location</p>
+
+        {auth.currentUser?.uid !== listing.userRef && (
+          <Link 
+            to={
+              `/contact/${listing.userRef}?listingName=${listing.name}&lisitngLocaiton=${listing.locaiton}`
+            } 
+            className='primaryButton'>
+            Contact LandLord
+          </Link>
+        )}
+      </div>
+    </main>
   )
 }
 
