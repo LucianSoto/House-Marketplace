@@ -34,6 +34,8 @@ const Listing = () => {
     return <Spinner/>
   }
 
+  console.log(listing.useRef)
+
   return (
     <main>
       {/* slider */}
@@ -86,7 +88,7 @@ const Listing = () => {
         {auth.currentUser?.uid !== listing.userRef && (
           <Link 
             to={
-              `/contact/${listing.userRef}?listingName=${listing.name}&lisitngLocaiton=${listing.locaiton}`
+              `/contact/${listing.useRef}?listingName=${listing.name}`
             } 
             className='primaryButton'>
             Contact LandLord
