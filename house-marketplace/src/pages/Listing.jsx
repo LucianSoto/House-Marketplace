@@ -5,7 +5,7 @@ import { getAuth } from 'firebase/auth'
 import { db } from '../firebase.config'
 import Spinner from '../components/Spinner'
 import ShareIcon from '../assets/svg/shareIcon.svg'
-        //AIzaSyA3GOBxyITGEO7sUnOZVHStpVJ6j6-28dI  GEOCODE API
+import { Wrapper, Status, Map, Marker } from '@googlemaps/react-wrapper'
 
 
 const Listing = () => {
@@ -36,7 +36,11 @@ const Listing = () => {
     return <Spinner/>
   }
 
-  console.log(listing)
+  console.log(listing.geolocation)
+
+  const render = (status: Status) => {
+    return <h1>{status}</h1>
+  }
 
   return (
     <main>
@@ -87,8 +91,6 @@ const Listing = () => {
 
         <p className="listingLocaitonTitle">Location</p>
 
-
-
         {auth.currentUser?.uid !== listing.userRef && (
           <Link 
             to={
@@ -98,6 +100,14 @@ const Listing = () => {
             Contact LandLord
           </Link>
         )}
+
+      {/* MAP */}
+      <div className="leafletContainer">
+        <Wrapper apiKey={`${process.env.REACT_APP_GEOCODE_API_KEY}`} render={render}>
+          <Map center={[listing.geolocation.lat, listing.geolocation.lng]} style={{height: '100%', width:'100%'}} >
+          </Map>   
+        </Wrapper>
+      </div>
       </div>
     </main>
   )
