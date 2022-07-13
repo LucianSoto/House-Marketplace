@@ -117,33 +117,31 @@ const CreateListing = () => {
       return
     }
 
-    // let geolocation = {}
+    let geolocation = {}
     let location
     location = address
 
-    // if(geolocationEnabled) {
-    //   const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${process.env.REACT_APP_GEOCODE_API_KEY}`)
-    //   // RESTART SERVER WHENEVER YOU ADD A NEW ENVIRONMENT VARIABLE
+    if(geolocationEnabled) {
+      const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${process.env.REACT_APP_GEOCODE_API_KEY}`)
+      // RESTART SERVER WHENEVER YOU ADD A NEW ENVIRONMENT VARIABLE
 
-    //   const data = await response.json()
+      const data = await response.json()
 
-    //   geolocation.lat = data.result[0]?.geometry.location.lat ??
-    //   0
-    //   geolocation.lng = data.result[0]?.geometry.location.lng ??
-    //   0
+      geolocation.lat = data.results[0]?.geometry.location.lat ?? 0
+      geolocation.lng = data.results[0]?.geometry.location.lng ?? 0
 
-    //   location = data.status === 'ZERO_RESULTS' ? undefined : data.results[0]?.formatted_address
+      location = data.status === 'ZERO_RESULTS' ? undefined : data.results[0]?.formatted_address
 
-    //   if (location === undefined || location.includes('undefined')) {
-    //     setLoading(false)
-    //     toast.error('Please enter a correct address')
-    //     return
-    //   }
-    // } else {
-    //   geolocation.lat = latitude
-    //   geolocation.lng = longitude
-    //   
-    // }
+      if (location === undefined || location.includes('undefined')) {
+        setLoading(false)
+        toast.error('Please enter a correct address')
+        return
+      }
+    } else {
+      console.log(geolocation.lat)
+      geolocation.lat = latitude
+      geolocation.lng = longitude
+    }
 
     //Store image in firebase
     const storeImage = async (image) => {
@@ -153,7 +151,7 @@ const CreateListing = () => {
         const storageRef = ref(storage, 'images/' + fileName)
         const uploadTask = uploadBytesResumable(storageRef, image)
 
-        uploadTask.on('state_changed', 
+        uploadTask.on('state_changed',      
           (snapshot) => {
             const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
             console.log('Upload is ' + progress + '% done');
@@ -192,19 +190,19 @@ const CreateListing = () => {
     const formDataCopy = {
       ...formData,
       imgUrls,
-      // geolocaion,
+      geolocation,
       timestamp: serverTimestamp() 
     }
 
     formDataCopy.locaiton = address
     delete formDataCopy.images
-    delete formDataCopy.address
+    delete formDataCopy.address=
     !formDataCopy.offer && delete formDataCopy.discountedPrice
 
     const docRef = await addDoc(collection(db, 'listings'), formDataCopy)
     setLoading(false)
     toast.success('Listing Saved')
-    navigate(`./category/${formDataCopy.type}/${docRef.id}`)
+    navigate(`/category/${formDataCopy.type}/${docRef.id}`)
   }
 
   return (
