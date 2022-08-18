@@ -5,7 +5,9 @@ import { getAuth } from 'firebase/auth'
 import { db } from '../firebase.config'
 import Spinner from '../components/Spinner'
 import ShareIcon from '../assets/svg/shareIcon.svg'
-import { Wrapper, Status, Map, Marker } from '@googlemaps/react-wrapper'
+import GoogleMapReact from 'google-map-react'
+
+import Pin from '../assets/pin.png'
 
 
 const Listing = () => {
@@ -37,10 +39,6 @@ const Listing = () => {
   }
 
   console.log(listing.geolocation)
-
-  const render = (status: Status) => {
-    return <h1>{status}</h1>
-  }
 
   return (
     <main>
@@ -102,11 +100,37 @@ const Listing = () => {
         )}
 
       {/* MAP */}
-      <div className="leafletContainer">
-        <Wrapper apiKey={`${process.env.REACT_APP_GEOCODE_API_KEY}`} render={render}>
-          <Map center={[listing.geolocation.lat, listing.geolocation.lng]} style={{height: '100%', width:'100%'}} >
-          </Map>   
-        </Wrapper>
+      <div className="leafletContainer" 
+      // style={{height: "100%", width: "100%"}}
+      
+      >
+        <GoogleMapReact 
+        
+          bootstrapURLKeys={{key: `${process.env.REACT_APP_GEOCODE_API_KEY}`}} 
+          defaultCenter={listing.geolocation}
+          defaultZoom={10}
+          zoom={10}
+          hoverDistance={10}
+
+        >
+        <div className="marker" lat={listing.geolocation.lat} lng={listing.geolocation.lng}>
+          <img src={Pin} alt="" />
+        </div>
+{/* 
+lat={listing.geolocation.lat}
+            lng={listing.geolocation.lng} */}
+          {/* {this.props.locations.map(item => {
+            if (item.address.length !== 0) {
+              return item.address.map(i => {
+                return (
+                  <Link to={"/" + item.name} key={i.id} lat={i.lat} lng={i.lng}>
+                    <img style={markerStyle} src={pin} alt="pin" />
+                  </Link>
+                );
+              });
+            }
+          })} */}
+        </GoogleMapReact>
       </div>
       </div>
     </main>
