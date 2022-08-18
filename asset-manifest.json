@@ -1,13 +1,14 @@
 {
   "files": {
     "main.css": "/House-Marketplace/static/css/main.34b976f3.css",
-    "main.js": "/House-Marketplace/static/js/main.925791f8.js",
+    "main.js": "/House-Marketplace/static/js/main.d8af3bf7.js",
     "static/js/787.889a0458.chunk.js": "/House-Marketplace/static/js/787.889a0458.chunk.js",
     "static/media/sellCategoryImage.jpg": "/House-Marketplace/static/media/sellCategoryImage.c4d28ee7217d692d13fb.jpg",
     "static/media/googleIcon.svg": "/House-Marketplace/static/media/googleIcon.a2a9c863d781c3e8abab4e7390cde6cb.svg",
     "index.html": "/House-Marketplace/index.html",
     "static/media/bathtubIcon.svg": "/House-Marketplace/static/media/bathtubIcon.b95c8ddb4dae960083f7c6ba713cbb50.svg",
     "static/media/badgeIcon.svg": "/House-Marketplace/static/media/badgeIcon.6a60b5bc1167fef5e6d0.svg",
+    "static/media/shareIcon.svg": "/House-Marketplace/static/media/shareIcon.cbe96fad91328dae35508b04182f4a7e.svg",
     "static/media/bedIcon.svg": "/House-Marketplace/static/media/bedIcon.eefa75b10479ecc5ec087e92666866eb.svg",
     "static/media/exploreIcon.svg": "/House-Marketplace/static/media/exploreIcon.46f5bb6905dae22016100504332a86a9.svg",
     "static/media/localOfferIcon.svg": "/House-Marketplace/static/media/localOfferIcon.2f90605bf28080e608c8ce11d8b9eb5e.svg",
@@ -19,11 +20,11 @@
     "static/media/keyboardArrowRightIcon.svg": "/House-Marketplace/static/media/keyboardArrowRightIcon.8cee54bec29003f4c3faa8f2acfa6de8.svg",
     "static/media/homeIcon.svg": "/House-Marketplace/static/media/homeIcon.09f28a7193ed1624e778ad88fc51ab56.svg",
     "main.34b976f3.css.map": "/House-Marketplace/static/css/main.34b976f3.css.map",
-    "main.925791f8.js.map": "/House-Marketplace/static/js/main.925791f8.js.map",
+    "main.d8af3bf7.js.map": "/House-Marketplace/static/js/main.d8af3bf7.js.map",
     "787.889a0458.chunk.js.map": "/House-Marketplace/static/js/787.889a0458.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.34b976f3.css",
-    "static/js/main.925791f8.js"
+    "static/js/main.d8af3bf7.js"
   ]
 }
