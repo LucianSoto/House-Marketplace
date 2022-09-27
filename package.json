@@ -11,12 +11,16 @@
     "firebase": "^9.8.2",
     "gh-pages": "^4.0.0",
     "google-map-react": "^2.2.0",
+    "leaflet": "^1.9.1",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-geocode": "^0.2.3",
+    "react-leaflet": "^4.1.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
+    "react-slick": "^0.29.0",
     "react-toastify": "^9.0.4",
+    "slick-carousel": "^1.8.1",
     "uuid": "^8.3.2",
     "web-vitals": "^2.1.4"
   },
@@ -34,16 +38,14 @@
       "react-app/jest"
     ]
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+  "production": [
+    ">0.2%",
+    "not dead",
+    "not op_mini all"
+  ],
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not op_mini all"
+  ]
 }
