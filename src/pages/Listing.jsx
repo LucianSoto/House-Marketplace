@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
-import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import 'swiper/swiper.scss'
+// import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper'
+// import { Swiper, SwiperSlide } from 'swiper/react'
+// import 'swiper/swiper.scss'
 
 
 import Slider from 'react-slick'
@@ -49,19 +49,19 @@ const Listing = () => {
 
   return (
     <main>
-      {/* <Slider slidesToShow={1} slidesToScroll={1} dots={true} >
+      <Slider slidesToShow={1} slidesToScroll={1} dots={true} >
       {listing.imgUrls.map((url, i) => (
             <div 
+              height={200}
               key={i}
               className="swiperSlideDiv" 
-              style={{background: `url(${listing.imgUrls[i]}) center no-repeat`, 
-              backgroundSize: "cover",}}
             >
+              <img style={{height: 200}} src={`${listing.imgUrls[i]}`} alt="" />
             </div>
         ))}
-      </Slider> */}
+      </Slider>
 
-      <Swiper
+      {/* <Swiper
         slidesPerView={1}
         pagination={{clickable: true}}
       >
@@ -76,9 +76,9 @@ const Listing = () => {
             </div>
           </SwiperSlide>
         ))}
-      </Swiper>
+      </Swiper> */}
 
-      <div className="shareIconDiv" onClick={()=> {
+      {/* <div className="shareIconDiv" onClick={()=> {
         navigator.clipboard.writeText(window.location.href)
         setShareLinkCopied(true)
         setTimeout(()=> {
@@ -132,7 +132,7 @@ const Listing = () => {
             className='primaryButton'>
             Contact LandLord
           </Link>
-        )}
+        )} */}
 
       {/* MAP */}
         <div className="leafletContainer" > 
@@ -157,7 +157,7 @@ const Listing = () => {
             
           </MapContainer>
         </div>
-      </div>
+      {/* </div> */}
     </main>
   )
 }
