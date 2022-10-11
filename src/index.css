@@ -296,6 +296,10 @@ button {
   margin-bottom: 3rem;
 }
 
+#sign-in-instead {
+  margin-bottom: 6rem;
+}
+
 @media (min-width: 1217px) {
   .explore {
     margin-bottom: 10rem;
