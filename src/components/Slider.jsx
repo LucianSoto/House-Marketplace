@@ -38,7 +38,6 @@ const Slider = () => {
         let listingsArr = []
 
         querySnap.forEach((doc) => {
-          console.log(doc.data().imgUrls[0])
           listingsArr.push({
             type: doc.data().type,
             img: doc.data().imgUrls,
@@ -55,7 +54,10 @@ const Slider = () => {
     fetchImgUrls()
   }, [])
 
-  console.log(listings)
+  if(listings.length === 0) {
+    return <></>
+  }
+
   return (
     <>
     <h2>Recommended</h2>
