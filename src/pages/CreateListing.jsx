@@ -6,7 +6,7 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from 'firebase/storage'
-import { addDoc, collection, serverTimestamp, serverTimeStamp } from 'firebase/firestore'
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
 import { db } from '../firebase.config'
 import { useNavigate } from 'react-router-dom'
 import Spinner from '../components/Spinner'
@@ -257,7 +257,7 @@ const CreateListing = () => {
                 value={bedrooms}
                 onChange={onMutate}
                 min='1'
-                max='50'
+                max='25'
                 required
               />
             </div>
@@ -270,7 +270,7 @@ const CreateListing = () => {
                 value={bathrooms}
                 onChange={onMutate}
                 min='1'
-                max='50'
+                max='25'
                 required
               />
             </div>
