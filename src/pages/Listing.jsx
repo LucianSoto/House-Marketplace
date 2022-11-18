@@ -33,7 +33,6 @@ const Listing = () => {
       const docSnap = await getDoc(docRef)
 
       if(docSnap.exists()) {
-        // console.log(docSnap.data())
         setListing(docSnap.data())
         setLoading(false)
       }
@@ -46,7 +45,7 @@ const Listing = () => {
     return <Spinner/>
   }
 
-  console.log(listing.imgUrls)
+  console.log(listing)
 
   return (
     <main>

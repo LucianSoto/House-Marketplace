@@ -54,9 +54,9 @@ const Slider = () => {
     fetchImgUrls()
   }, [])
 
-  if(listings.length === 0) {
-    return <></>
-  }
+  // if(listings.length === 0) {
+  //   return <>HI</>
+  // }
 
   return (
     <>
