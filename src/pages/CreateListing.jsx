@@ -44,8 +44,8 @@ const CreateListing = () => {
     regularPrice,
     discountedPrice,
     images,
+    longitude,
     latitude,
-    longitude
   } = formData
 
   const auth = getAuth()
@@ -102,6 +102,7 @@ const CreateListing = () => {
   }
 
   const onSubmit = async (e) => {
+    console.log('submitting')
     e.preventDefault()
     setLoading(true)
 
@@ -122,6 +123,7 @@ const CreateListing = () => {
     location = address
 
     if(geolocationEnabled) {
+      console.log(address)
       const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${process.env.REACT_APP_GEOCODE_API_KEY}`)
       // RESTART SERVER WHENEVER YOU ADD A NEW ENVIRONMENT VARIABLE
 
@@ -178,6 +180,11 @@ const CreateListing = () => {
         );
       })
     }
+
+    // https://firebasestorage.googleapis.com/v0/b/house-marketplace-4bf72.appspot.com/o/images%2FtYbfcv7FoTelyuqsYmyxW5PWLre2-interior_6.jpeg-ba6c8a8e-731b-49f3-a7bd-995a7e1af567?alt=media&token=50daf088-6525-4716-bcaf-0ac43b76883a
+
+    // https://firebasestorage.googleapis.com/v0/b/house-marketplace-4bf72.appspot.com/o/images%2FtYbfcv7FoTelyuqsYmyxW5PWLre2-interior_6.jpeg-ba6c8a8e-731b-49f3-a7bd-995a7e1af567?alt=media&token=50daf088-6525-4716-bcaf-0ac43b76883a/
+
 
     const imgUrls = await Promise.all(
       [...images].map((image) => storeImage(image))
