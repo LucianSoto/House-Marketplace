@@ -47,7 +47,7 @@ function SignUp() {
 
       await setDoc(doc(db, 'users', user.uid), formDataCopy)
       
-      navigate('/')
+      navigate('/profile')
     } catch (error) {
       toast.error('Check all fields')
     }

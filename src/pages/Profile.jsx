@@ -46,7 +46,6 @@ function Profile() {
         setLoading(false)
     }
 
-
     fetchUserListings()
   },[auth.currentUser.uid])
 

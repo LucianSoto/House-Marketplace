@@ -29,15 +29,15 @@ function SignIn() {
 
     try{
       const auth = getAuth()
-    const userCredential = await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    )
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      )
 
-    if(userCredential.user) {
-      navigate('/profile')
-    }
+      if(userCredential.user) {
+        navigate('/profile')
+      }
     } catch (error) {
       toast.error('Bad User Credentials')
     }
