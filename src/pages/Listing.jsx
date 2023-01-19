@@ -125,7 +125,7 @@ const Listing = () => {
         <p className="listingLocaitonTitle">Location</p>
 
         {auth.currentUser?.uid !== listing.userRef && (
-          <Link 
+          <Link style={{marginBottom: 70, marginTop: 50, width: "40%"}}
             to={
               `/contact/${listing.useRef}?listingName=${listing.name}`
             } 

@@ -183,11 +183,6 @@ const CreateListing = () => {
       })
     }
 
-    // https://firebasestorage.googleapis.com/v0/b/house-marketplace-4bf72.appspot.com/o/images%2FtYbfcv7FoTelyuqsYmyxW5PWLre2-interior_6.jpeg-ba6c8a8e-731b-49f3-a7bd-995a7e1af567?alt=media&token=50daf088-6525-4716-bcaf-0ac43b76883a
-
-    // https://firebasestorage.googleapis.com/v0/b/house-marketplace-4bf72.appspot.com/o/images%2FtYbfcv7FoTelyuqsYmyxW5PWLre2-interior_6.jpeg-ba6c8a8e-731b-49f3-a7bd-995a7e1af567?alt=media&token=50daf088-6525-4716-bcaf-0ac43b76883a/
-
-
     const imgUrls = await Promise.all(
       [...images].map((image) => storeImage(image))
     ).catch(() => {
